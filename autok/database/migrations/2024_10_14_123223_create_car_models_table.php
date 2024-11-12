@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('car_models', function (Blueprint $table) {
             $table->id();
-            $table->integer('makerId');
+            $table->integer('maker_id');
             $table->string('name');
-            $table->foreign("makerId")->references('id')->on('makers');
+            //$table->foreign("makerId")->references('id')->on('makers');
         });
     }
 

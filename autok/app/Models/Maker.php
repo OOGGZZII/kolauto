@@ -12,4 +12,9 @@ class Maker extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    function carModels()
+    {
+        return $this->hasMany(carModel::class);
+    }
 }

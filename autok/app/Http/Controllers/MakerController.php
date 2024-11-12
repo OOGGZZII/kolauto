@@ -7,59 +7,47 @@ use App\Models\Maker;
 
 class MakerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('makers/list', ['entities' => Maker::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $body  = new Maker();
+        $body->name = $request->input('name');
+        $body->save();
+
+        return redirect()->route('makers')->with('success', "Sikeresen hozzáadva");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $maker = Maker::find($id);
+        return view('makers.edit', compact('maker'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate(['name'=>"required|min:3|max:10"], ['required'=>"Kötelező", "min"=>"Túl rövid, legalább 3", "max"=>"Túl hosszú, legfeljebb 10"]);
+        $maker  = Maker::find($id);
+        $maker->name = $request->input('name');
+        $maker->save();
+
+        return redirect()->route('makers')->with('success', "Sikeresen módisítva");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        $maker  = Maker::find($id);
+        $maker->delete();
+
+        return redirect()->route('makers')->with('success', "Sikeresen törölve");
     }
 }

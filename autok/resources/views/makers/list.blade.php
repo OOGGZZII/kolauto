@@ -6,14 +6,22 @@
             <tr>
                 <th>#</th>
                 <th>Gyártó</th>
+                <th>Műveletek</th>
             </tr>
         </thead>
         <tbody>
             @foreach($entities as $entity)
-                <tr>
-                    <td id="{{$entity->id}}">{{$entity->id}}</td>
-                    <td>{{$entity->name}}</td>
-                </tr>
+                    <tr>
+                        <td id="{{$entity->id}}">{{$entity->id}}</td>
+                        <td><a href='{{route("makerModels", ["id"=>$entity->id])}}'>{{$entity->name}}</a></td>
+                        <td><a href='{{route("makers.edit", ["id"=>$entity->id])}}'>Módosítás</a>
+                            <form action="{{route("makers.destroy", $entity->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="del">Törlés</button>
+                            </form>
+                        </td>
+                    </tr>
             @endforeach
         </tbody>
     </table>
