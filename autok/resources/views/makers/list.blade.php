@@ -5,14 +5,14 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Gyártó</th>
+                <th>Gyártó <a href='{{route("makers.create")}}'>Új</a></th>
                 <th>Műveletek</th>
             </tr>
         </thead>
         <tbody>
             @foreach($entities as $entity)
-                    <tr>
-                        <td id="{{$entity->id}}">{{$entity->id}}</td>
+                    <tr id="{{$entity->id}}">
+                        <td>{{$entity->id}}</td>
                         <td><a href='{{route("makerModels", ["id"=>$entity->id])}}'>{{$entity->name}}</a></td>
                         <td><a href='{{route("makers.edit", ["id"=>$entity->id])}}'>Módosítás</a>
                             <form action="{{route("makers.destroy", $entity->id)}}" method="POST">

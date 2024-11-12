@@ -14,7 +14,7 @@ class MakerController extends Controller
 
     public function create()
     {
-        //
+        return view('makers.create');
     }
 
     public function store(Request $request)
