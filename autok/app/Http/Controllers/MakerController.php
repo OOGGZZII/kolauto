@@ -34,12 +34,12 @@ class MakerController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $request->validate(['name'=>"required|min:3|max:10"], ['required'=>"Kötelező", "min"=>"Túl rövid, legalább 3", "max"=>"Túl hosszú, legfeljebb 10"]);
+        $request->validate(['name'=>"required|min:3|max:100"], ['required'=>"Kötelező", "min"=>"Túl rövid, legalább 3", "max"=>"Túl hosszú, legfeljebb 10"]);
         $maker  = Maker::find($id);
         $maker->name = $request->input('name');
         $maker->save();
 
-        return redirect()->route('makers')->with('success', "Sikeresen módisítva");
+        return redirect()->route('makers')->with('success', "Sikeresen módosítva");
     }
 
 
